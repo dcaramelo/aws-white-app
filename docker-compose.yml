@@ -1,0 +1,34 @@
+version: '3.6'
+
+services:
+  mysql-container:
+    image: mysql:latest
+    volumes:
+      - ./data/db:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: azerty123456
+      MYSQL_DATABASE: aws
+      MYSQL_USER: aws
+      MYSQL_PASSWORD: azerty123456
+    networks:
+      - backend
+
+  api:
+    restart: always
+    depends_on:
+      - mysql-container
+    build: .
+    ports:
+      - "8080:8080"
+    networks:
+      - backend
+    links:
+      - mysql-container:mysql
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-container:3306/aws
+      SPRING_DATASOURCE_USERNAME: aws
+      SPRING_DATASOURCE_PASSWORD: azerty123456
+
+networks:
+  backend:

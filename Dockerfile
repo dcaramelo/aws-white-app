@@ -5,7 +5,12 @@ WORKDIR /app
 RUN mvn install
 
 FROM openjdk:8-jre-alpine
+
+LABEL author="David Caramelo"
+MAINTAINER david.caramelo83@gmail.com
+
 WORKDIR /app
-COPY --from=build target/aws-white-app-1.0-SNAPSHOT.jar /app
-CMD ["java -jar aws-white-app-1.0-SNAPSHOT.jar"]
+COPY --from=build /app/target/aws-white-app-1.0-SNAPSHOT.jar /app
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "aws-white-app-1.0-SNAPSHOT.jar"]
 
