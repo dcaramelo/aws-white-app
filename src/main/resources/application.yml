@@ -1,6 +1,12 @@
+rds_hostname: localhost
+rds_username: aws
+rds_password: azerty123456
+rds_port: 3306
+rds_db_name: aws
+
 spring:
   jpa.hibernate.ddl-auto: create
   datasource:
-    url: jdbc:mysql://locahost:3306/aws
-    username: aws
-    password: azerty123456
+    url: jdbc:mysql://${rds_hostname}:${rds_port}/${rds_db_name}
+    username: ${rds_username}
+    password: ${rds_password}

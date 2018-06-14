@@ -26,9 +26,11 @@ services:
     links:
       - mysql-container:mysql
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-container:3306/aws
-      SPRING_DATASOURCE_USERNAME: aws
-      SPRING_DATASOURCE_PASSWORD: azerty123456
+      rds_hostname: mysql-container
+      rds_username: aws
+      rds_password: azerty123456
+      rds_port: 3306
+      rds_db_name: aws
 
 networks:
   backend:
